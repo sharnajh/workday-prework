@@ -1,4 +1,4 @@
-//Global Constants
+/Global Constants
 const clueHoldTime = 1000; //how long to hold each clue's light/sound
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
@@ -21,7 +21,7 @@ const randomPattern = () => {
 
 const startGame = () => {
   incrementProgressBar(0);
-  
+
   //initialize game variables
   progress = 0;
   gamePlaying = true;
@@ -31,12 +31,9 @@ const startGame = () => {
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   document.getElementById("progressBar").classList.remove("hidden");
-  
+
   // Proceed
-  context.resume().then(() => {
-    console.log("Playback resumed successfully");
-    playClueSequence();
-  });
+  playClueSequence();
 };
 
 const stopGame = () => {
@@ -128,6 +125,10 @@ const freqMap = {
 };
 
 const playTone = (btn, len) => {
+  // Fix Chrome issue
+  context.resume().then(() => {
+    console.log("Playback resumed successfully");
+  });
   o.frequency.value = freqMap[btn];
   g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
   tonePlaying = true;
@@ -137,6 +138,10 @@ const playTone = (btn, len) => {
 };
 
 const startTone = btn => {
+  // Fix Chrome issue
+  context.resume().then(() => {
+    console.log("Playback resumed successfully");
+  });
   if (!tonePlaying) {
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
