@@ -137,6 +137,9 @@ const playTone = (btn, len) => {
 };
 
 const startTone = btn => {
+  context.resume().then(() => {
+    console.log("Playback resumed successfully");
+  });
   if (!tonePlaying) {
     o.frequency.value = freqMap[btn];
     g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
