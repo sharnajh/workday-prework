@@ -125,6 +125,7 @@ const freqMap = {
 };
 
 const playTone = (btn, len) => {
+  // Fix Chrome issue
   context.resume().then(() => {
     console.log("Playback resumed successfully");
   });
@@ -137,6 +138,7 @@ const playTone = (btn, len) => {
 };
 
 const startTone = btn => {
+  // Fix Chrome issue
   context.resume().then(() => {
     console.log("Playback resumed successfully");
   });
