@@ -21,9 +21,7 @@ const randomPattern = () => {
 
 const startGame = () => {
   incrementProgressBar(0);
-  context.resume().then(() => {
-    console.log("Playback resumed successfully");
-  });
+  
   //initialize game variables
   progress = 0;
   gamePlaying = true;
@@ -33,8 +31,12 @@ const startGame = () => {
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   document.getElementById("progressBar").classList.remove("hidden");
-
-  playClueSequence();
+  
+  // Proceed
+  context.resume().then(() => {
+    console.log("Playback resumed successfully");
+    playClueSequence();
+  });
 };
 
 const stopGame = () => {
