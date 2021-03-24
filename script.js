@@ -4,7 +4,7 @@ const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 
 //Global Variables
-let pattern = [];  // Random pattern is generate at every new game
+let pattern = []; // Random pattern is generate at every new game
 let progress = 0;
 let gamePlaying = false;
 let tonePlaying = false;
@@ -21,6 +21,7 @@ const randomPattern = () => {
 
 const startGame = () => {
   incrementProgressBar(0);
+  
   //initialize game variables
   progress = 0;
   gamePlaying = true;
@@ -30,8 +31,12 @@ const startGame = () => {
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   document.getElementById("progressBar").classList.remove("hidden");
-
-  playClueSequence();
+  
+  // Proceed
+  context.resume().then(() => {
+    console.log("Playback resumed successfully");
+    playClueSequence();
+  });
 };
 
 const stopGame = () => {
@@ -57,9 +62,9 @@ const playSingleClue = btn => {
   }
 };
 
-const incrementProgressBar = (width) => {
+const incrementProgressBar = width => {
   document.getElementById("progressBar").style.width = width + "px";
-}
+};
 
 const playClueSequence = () => {
   guessCounter = 0;
