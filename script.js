@@ -21,7 +21,7 @@ const randomPattern = () => {
 
 const startGame = () => {
   incrementProgressBar(0);
-  
+
   //initialize game variables
   progress = 0;
   gamePlaying = true;
@@ -31,12 +31,9 @@ const startGame = () => {
   document.getElementById("startBtn").classList.add("hidden");
   document.getElementById("stopBtn").classList.remove("hidden");
   document.getElementById("progressBar").classList.remove("hidden");
-  
+
   // Proceed
-  context.resume().then(() => {
-    console.log("Playback resumed successfully");
-    playClueSequence();
-  });
+  playClueSequence();
 };
 
 const stopGame = () => {
@@ -128,6 +125,9 @@ const freqMap = {
 };
 
 const playTone = (btn, len) => {
+  context.resume().then(() => {
+    console.log("Playback resumed successfully");
+  });
   o.frequency.value = freqMap[btn];
   g.gain.setTargetAtTime(volume, context.currentTime + 0.05, 0.025);
   tonePlaying = true;
