@@ -20,6 +20,7 @@ const randomPattern = () => {
 };
 
 const startGame = () => {
+  // Set progress bar to zero
   incrementProgressBar(0);
 
   //initialize game variables
@@ -150,6 +151,10 @@ const startTone = btn => {
 };
 
 const stopTone = () => {
+  // Fix Chrome issue
+    context.resume().then(() => {
+      console.log("Playback resumed successfully");
+    });
   g.gain.setTargetAtTime(0, context.currentTime + 0.05, 0.025);
   tonePlaying = false;
 };
